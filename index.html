@@ -138,6 +138,29 @@
   .article-meta{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--muted);margin-top:6px;}
   .read-link{font-weight:600;font-size:.9rem;}
 
+  /* ---------- Contact form ---------- */
+  .contact-form-wrap{
+    background:var(--card);border:1px solid rgba(255,255,255,.08);
+    border-radius:var(--radius);padding:32px;max-width:640px;margin:0 auto 56px;
+  }
+  .contact-form-wrap h3{margin-bottom:6px;font-size:1.2rem;}
+  .contact-form-wrap p{color:var(--muted);font-size:.9rem;margin-bottom:22px;}
+  .form-row{margin-bottom:16px;}
+  .form-row label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:6px;}
+  .form-row input,.form-row textarea{
+    width:100%;background:var(--bg);border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;color:var(--text);padding:12px 14px;font-size:.95rem;
+    font-family:inherit;resize:vertical;
+  }
+  .form-row input:focus,.form-row textarea:focus{outline:none;border-color:var(--accent);}
+  .form-submit{
+    width:100%;background:var(--accent);color:#0b0f14;border:none;cursor:pointer;
+    padding:14px;border-radius:10px;font-weight:700;font-size:1rem;font-family:inherit;
+  }
+  .form-submit:hover{background:var(--accent-dark);}
+  .form-note{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center;}
+  .email-reveal{font-weight:700;color:var(--text);font-size:1rem;letter-spacing:.02em;}
+
   /* ---------- Contact ---------- */
   .contact{background:var(--bg-soft);border-top:1px solid rgba(255,255,255,.06);}
   .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
@@ -157,6 +180,7 @@
 
   footer{padding:34px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);}
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -168,7 +192,7 @@
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="nav-cta" href="/cdn-cgi/l/email-protection#93f8fae7e7fafefbfafffff2e1ead3f4fef2faffbdf0fcfe">Hire Me</a>
+    <a class="nav-cta" href="#contact-form">Hire Me</a>
   </nav>
 </header>
 
@@ -295,6 +319,32 @@
     <div class="sec-tag">Contact</div>
     <h2>Let's work together</h2>
     <p class="sec-sub">Available for freelance projects, retainers, and one-off commissions.</p>
+
+    <!-- Contact form — messages are delivered straight to Hillary's inbox -->
+    <div class="contact-form-wrap" id="contact-form">
+      <h3>Send me a message</h3>
+      <p>Tell me about your project, deadline, and the type of content you need.</p>
+      <form action="https://formsubmit.co/kittimhillary@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New enquiry — Hillary Kittim portfolio site">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <div class="form-row">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" type="text" name="name" placeholder="Jane Doe" required>
+        </div>
+        <div class="form-row">
+          <label for="cf-email">Your email</label>
+          <input id="cf-email" type="email" name="email" placeholder="jane@company.com" required>
+        </div>
+        <div class="form-row">
+          <label for="cf-msg">Your message</label>
+          <textarea id="cf-msg" name="message" rows="5" placeholder="Hi Hillary, I need casino review content for..." required></textarea>
+        </div>
+        <button class="form-submit" type="submit">Send Message ✉️</button>
+        <p class="form-note">Goes straight to my inbox — I usually reply within 24 hours.</p>
+      </form>
+    </div>
+
     <div class="contact-grid">
 
       <div class="contact-card">
@@ -307,16 +357,18 @@
       <div class="contact-card">
         <div class="contact-icon">✉️</div>
         <h3>Email</h3>
-        <p>Send me your brief — I usually reply within 24 hours.</p>
-        <!-- REPLACE with your Gmail address -->
-        <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#3a51534e4e5357525356565b48437a5d575b535614595557"><span class="__cf_email__" data-cfemail="4d262439392420252421212c3f340d2a202c2421632e2220">[email&#160;protected]</span></a>
+        <p>Prefer email? Reach me directly — I usually reply within 24 hours.</p>
+        <a class="email-reveal" href="/cdn-cgi/l/email-protection#caa1a3bebea3a7a2a3a6a6abb8b38aada7aba3a6e4a9a5a7f5b9bfa8a0afa9bef7a38daba7a3a4adeff8faa9a5a4beafa4beeff8faafa4bbbfa3b8b3"><span class="__cf_email__" data-cfemail="e08b899494898d88898c8c819299a0878d81898cce838f8d">[email&#160;protected]</span></a>
       </div>
 
       <div class="contact-card">
         <div class="contact-icon">📝</div>
         <h3>Request Samples</h3>
-        <p>Need niche-specific samples or a custom writing test? Just ask.</p>
-        <a class="btn btn-ghost" href="/cdn-cgi/l/email-protection#80ebe9f4f4e9ede8e9ecece1f2f9c0e7ede1e9ecaee3efedbff3f5e2eae5e3f4bdd7f2e9f4e9eee7a5b2b0f3e1edf0ece5f3a5b2b0f2e5f1f5e5f3f4">Request Samples</a>
+        <p>Need niche-specific samples or a custom writing test? Message me on either channel.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#eb80829f9f8286838287878a9992ab8c868a8287c5888486d4989e89818e889fd6bc99829f82858cced9db988a869b878e98ced9db998e9a9e8e989fcd89848f92d6a382ced9dba38287878a9992ced9a8cedbaacedbaaa2ced9dc8fced9db8782808eced9db9f84ced9db998e9a9e8e989fced9db9884868eced9db9c99829f82858cced9db988a869b878e98ced9db8d8499ced8aaced9db">Request via Email</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/hillary-kittim-4806bb410" target="_blank" rel="noopener">Message on LinkedIn</a>
+        </div>
       </div>
 
     </div>

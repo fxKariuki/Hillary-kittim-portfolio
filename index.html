@@ -159,7 +159,13 @@
   }
   .form-submit:hover{background:var(--accent-dark);}
   .form-note{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center;}
+  .form-status{margin-top:12px;text-align:center;font-size:.9rem;min-height:1.2em;}
   .email-reveal{font-weight:700;color:var(--text);font-size:1rem;letter-spacing:.02em;}
+  .copy-btn{
+    background:transparent;border:1px solid rgba(255,255,255,.18);color:var(--muted);
+    padding:6px 14px;border-radius:8px;cursor:pointer;font-size:.78rem;font-family:inherit;
+  }
+  .copy-btn:hover{border-color:var(--accent);color:var(--accent);}
 
   /* ---------- Contact ---------- */
   .contact{background:var(--bg-soft);border-top:1px solid rgba(255,255,255,.06);}
@@ -324,10 +330,11 @@
     <div class="contact-form-wrap" id="contact-form">
       <h3>Send me a message</h3>
       <p>Tell me about your project, deadline, and the type of content you need.</p>
-      <form action="https://formsubmit.co/kittimhillary@gmail.com" method="POST">
+      <form id="contactForm" action="https://formsubmit.co/kittimhillary@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="New enquiry — Hillary Kittim portfolio site">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_url" id="formUrl" value="">
         <div class="form-row">
           <label for="cf-name">Your name</label>
           <input id="cf-name" type="text" name="name" placeholder="Jane Doe" required>
@@ -340,8 +347,9 @@
           <label for="cf-msg">Your message</label>
           <textarea id="cf-msg" name="message" rows="5" placeholder="Hi Hillary, I need casino review content for..." required></textarea>
         </div>
-        <button class="form-submit" type="submit">Send Message ✉️</button>
-        <p class="form-note">Goes straight to my inbox — I usually reply within 24 hours.</p>
+        <button class="form-submit" id="formSubmitBtn" type="submit">Send Message ✉️</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        <p class="form-note">Goes straight to my inbox — I usually reply within 24 hours.<br>Prefer email? <a href="/cdn-cgi/l/email-protection#0962607d7d606461606565687b70496e64686065276a6664"><span class="__cf_email__" data-cfemail="c5aeacb1b1aca8adaca9a9a4b7bc85a2a8a4aca9eba6aaa8">[email&#160;protected]</span></a></p>
       </form>
     </div>
 
@@ -358,7 +366,10 @@
         <div class="contact-icon">✉️</div>
         <h3>Email</h3>
         <p>Prefer email? Reach me directly — I usually reply within 24 hours.</p>
-        <a class="email-reveal" href="/cdn-cgi/l/email-protection#caa1a3bebea3a7a2a3a6a6abb8b38aada7aba3a6e4a9a5a7f5b9bfa8a0afa9bef7a38daba7a3a4adeff8faa9a5a4beafa4beeff8faafa4bbbfa3b8b3"><span class="__cf_email__" data-cfemail="e08b899494898d88898c8c819299a0878d81898cce838f8d">[email&#160;protected]</span></a>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center;">
+          <a class="email-reveal" data-mailto data-subject="iGaming content enquiry" href="/cdn-cgi/l/email-protection#244f4d50504d494c4d484845565d644349454d480a474b491b5751464e414750194d6345494d4a43011614474b4a50414a50011614414a55514d565d"><span class="__cf_email__" data-cfemail="acc7c5d8d8c5c1c4c5c0c0cdded5eccbc1cdc5c082cfc3c1">[email&#160;protected]</span></a>
+          <button class="copy-btn" type="button" data-copy="kittimhillary@gmail.com">Copy address</button>
+        </div>
       </div>
 
       <div class="contact-card">
@@ -366,7 +377,7 @@
         <h3>Request Samples</h3>
         <p>Need niche-specific samples or a custom writing test? Message me on either channel.</p>
         <div style="display:flex;flex-direction:column;gap:10px;">
-          <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#eb80829f9f8286838287878a9992ab8c868a8287c5888486d4989e89818e889fd6bc99829f82858cced9db988a869b878e98ced9db998e9a9e8e989fcd89848f92d6a382ced9dba38287878a9992ced9a8cedbaacedbaaa2ced9dc8fced9db8782808eced9db9f84ced9db998e9a9e8e989fced9db9884868eced9db9c99829f82858cced9db988a869b878e98ced9db8d8499ced8aaced9db">Request via Email</a>
+          <a class="btn btn-primary" data-mailto data-subject="Writing samples request" data-body="Hi Hillary,%0A%0AI'd like to request some writing samples for: " href="/cdn-cgi/l/email-protection#e2898b96968b8f8a8b8e8e83909ba2858f838b8ecc818d8fdd91978088878196dfb5908b968b8c85c7d0d291838f928e8791c7d0d290879397879196c4808d869bdfaa8bc7d0d2aa8b8e8e83909bc7d0a1c7d2a3c7d2a3abc7d0d586c7d0d28e8b8987c7d0d2968dc7d0d290879397879196c7d0d2918d8f87c7d0d295908b968b8c85c7d0d291838f928e8791c7d0d2848d90c7d1a3c7d0d2">Request via Email</a>
           <a class="btn btn-ghost" href="https://www.linkedin.com/in/hillary-kittim-4806bb410" target="_blank" rel="noopener">Message on LinkedIn</a>
         </div>
       </div>
@@ -391,6 +402,88 @@
       c.style.display = (f === 'all' || c.dataset.cat === f) ? 'flex' : 'none';
     });
   }));
+
+  // ---------- Email links ----------
+  // Rebuild all mailto: hrefs at runtime. Some hosts (e.g. Cloudflare email
+  // obfuscation) rewrite mailto links into broken URLs that 404 — hrefs set
+  // by JavaScript are never rewritten, so this guarantees they work.
+  const EMAIL = 'kittimhillary@gmail.com';
+  document.querySelectorAll('a[data-mailto]').forEach(a => {
+    let href = 'mailto:' + EMAIL;
+    const params = [];
+    if (a.dataset.subject) params.push('subject=' + encodeURIComponent(a.dataset.subject));
+    if (a.dataset.body) params.push('body=' + encodeURIComponent(a.dataset.body));
+    if (params.length) href += '?' + params.join('&');
+    a.href = href;
+  });
+
+  // Copy-to-clipboard buttons (with fallback for older browsers)
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      } catch (e) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { ok = document.execCommand('copy'); } catch (e2) {}
+        document.body.removeChild(ta);
+      }
+      const original = btn.textContent;
+      btn.textContent = ok ? 'Copied!' : text;
+      setTimeout(() => { btn.textContent = original; }, 2000);
+    });
+  });
+
+  // ---------- Contact form ----------
+  // Submit via FormSubmit's AJAX endpoint so the visitor never navigates away
+  // (the redirect flow is what breaks with 404s on some hosts). If the AJAX
+  // call fails, fall back to opening the visitor's email app pre-filled.
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.getElementById('formSubmitBtn');
+  const formStatus = document.getElementById('formStatus');
+  if (document.getElementById('formUrl')) {
+    document.getElementById('formUrl').value = location.href;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    formStatus.style.color = '';
+    formStatus.textContent = '';
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/' + EMAIL, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error('Request failed');
+      form.reset();
+      formStatus.style.color = 'var(--accent)';
+      formStatus.textContent = 'Message sent! I usually reply within 24 hours.';
+    } catch (err) {
+      // Fallback: compose the same message in the visitor's email client
+      const subject = encodeURIComponent('New enquiry — Hillary Kittim portfolio site');
+      const body = encodeURIComponent(
+        'Name: ' + data.get('name') + '\nEmail: ' + data.get('email') + '\n\n' + data.get('message')
+      );
+      formStatus.style.color = 'var(--gold)';
+      formStatus.textContent = 'Opening your email app instead…';
+      window.location.href = 'mailto:' + EMAIL + '?subject=' + subject + '&body=' + body;
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send Message ✉️';
+  });
 </script>
 
 </body>
